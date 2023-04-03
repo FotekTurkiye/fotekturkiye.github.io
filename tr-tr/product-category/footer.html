@@ -1,0 +1,114 @@
+<footer class="footer">
+    <div class="container pt-3 pb-lg-3">
+      <div class="row">
+        <div class="col-xl-4 d-flex d-lg-none d-xl-flex align-items-center">
+          <a href="index.html" class="logo mb-4 mr-lg-1 col-7 col-sm p-0"><img alt=""
+              src="image/catalog/logo-f-1-min.png?v=1597127923"></a>
+          <a href="index.html" class="logo mb-4 col-5 col-sm p-0"><img alt=""
+              src="image/catalog/logo-f-2-min-1.png?v=1597130294"></a>
+        </div>
+        <div class="col-lg-6 col-xl-5 mb-4">
+          <h5 class="footer-title"><span>Firma Bilgileri</span></h5>
+          <p class="mb-2 mb-md-0"><a href="https://goo.gl/maps/oEPNfTWBYGoQsTQ7A" title="" target="_blank">İOSB
+              Mutfakçılar San. Sitesi M5 Blok No:33, 34490 Başakşehir/İstanbul</a></p>
+          <div class="row no-gutters contact-info">
+            <div class="col-md-6 mb-1"><a href="tel:+902122494630 "><i class="fas"></i>Telefon: +902122494630</a></div>
+            <div class="col-md-6 mb-1"><a href="https://wa.me/905433436835"><i class="fas"></i>Whatsapp:
+                +905433436835</a></div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-xl-3 mb-4">
+          <h5 class="footer-title"><span>Servisler</span></h5>
+          <ul class="row no-gutters list-angle">
+            <li class="col-4"><a href="tr-tr/product-category.html">Ürünler</a></li>
+            <li class="col-4"><a href="tr-tr/download.html">Ürün Belgeleri</a></li>
+            <li class="col-4"><a href="tr-tr/information/11.html">Hakkımızda</a></li>
+            <li class="col-4"><a href="tr-tr/contact-us.html">İletişim</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a class="scrollToTop" href="#"><i class="fas fa-chevron-up"></i></a>
+
+  <script src="catalog/view/assets/js/bootstrap.min.js"></script>
+  <script src="catalog/view/assets/js/jquery.slick-1.9.0.min.js"></script>
+  <script src="catalog/view/assets/js/wow.min.js"></script>
+  <script src="catalog/view/assets/js/jquery.magnificpo pup-1.1.0.min.js"></script>
+  <script src="catalog/view/assets/js/common.js?v4"></script>
+  <script Tipi="text/javascript" src="catalog/view/js/cpcart.js"></script>
+  <script Tipi="text/javascript" src="catalog/view/js/cpwishlist.js"></script>
+  <script>
+    // set cp wishlist
+    CPcart.addBtn = ".add-wishlist-btn";
+    CPcart.removeBtn = ".remove-wishlist-btn";
+    CPcart.wishedHtml = "<i class='fas fa-heart'></i>";
+    CPcart.notWishedHtml = "<i class='far fa-heart'></i>";
+
+    $(document).on('click', CPcart.addBtn, function (event) {
+      var id = $(this).data('id');
+      CPcart.addWishlist(id, function (json) {
+        if (json['message']) {
+          $(CPcart.addBtn + '[data-id=' + id + ']').html(CPcart.wishedHtml);
+          $(CPcart.addBtn + '[data-id=' + id + ']').addClass(CPcart.removeBtn.substr(1));
+          $(CPcart.removeBtn + '[data-id=' + id + ']').removeClass(CPcart.addBtn.substr(1));
+        }
+
+        if (json['error']) {
+          alert(json['error'])
+        }
+      });
+    });
+
+    $(document).on('click', CPcart.removeBtn, function (event) {
+      var id = $(this).data('id');
+      CPcart.deleteWishlist(id, function (json) {
+        if (json['message']) {
+          $(CPcart.removeBtn + '[data-id=' + id + ']').html(CPcart.notWishedHtml);
+          $(CPcart.removeBtn + '[data-id=' + id + ']').addClass(CPcart.addBtn.substr(1));
+          $(CPcart.addBtn + '[data-id=' + id + ']').removeClass(CPcart.removeBtn.substr(1));
+        }
+
+        if (json['error']) {
+          alert(json['error'])
+        }
+      });
+    });
+  </script>
+  <scrip Tipi="text/javascript">
+
+    $('[name=\'filter_name\']').keydown(function (event) {
+      if (event.which == 13) {
+        event.preventDefault();
+        $('#header_filter').trigger('click');
+      }
+    });
+
+    $('#form-search').submit(function () {
+      event.preventDefault();
+      const c = $('#lancode').val();
+      let url = 'index.php?route=product/category&_language_=' + c;
+      let filter_name = $('[name=keyword]').val();
+      if (filter_name) {
+        url += '&keyword=' + encodeURIComponent(filter_name);
+      }
+      location = url;
+      return false;
+    });
+
+    $('#header_filter').click(function (event) {
+      event.preventDefault();
+      const c = $('#lancode').val();
+      let url = 'index.php?route=product/category&_language_=' + c;
+      let filter_name = $('[name=keyword]').val();
+      if (filter_name) {
+        url += '&keyword=' + encodeURIComponent(filter_name);
+      }
+      location = url;
+    });
+  </script>
+
+</body>
+
+</html>
